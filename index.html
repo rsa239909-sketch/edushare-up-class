@@ -3,20 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduShare - Nền tảng chia sẻ tài liệu học tập Cloud</title>
+    <title>EduShare - Nền tảng chia sẻ tài liệu học tập</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Firebase SDKs -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, orderBy, serverTimestamp, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-        import { getAuth, signInAnonymously, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        
-        // Gắn các hàm firebase ra window để dùng chung trong script thuần
-        window.firebaseModules = { initializeApp, getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, orderBy, serverTimestamp, increment, getAuth, signInAnonymously, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged };
-    </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -33,7 +24,7 @@
                 </div>
                 <div>
                     <span class="text-xl font-extrabold bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">EduShare</span>
-                    <span class="text-xs bg-indigo-50 text-indigo-600 font-semibold px-2 py-0.5 rounded-full ml-2 border border-indigo-100">Cloud 100% Free</span>
+                    <span class="text-xs bg-indigo-50 text-indigo-600 font-semibold px-2 py-0.5 rounded-full ml-2 border border-indigo-100">Free 100%</span>
                 </div>
             </div>
 
@@ -51,14 +42,14 @@
             <div class="flex items-center space-x-3">
                 <div id="userGuestSection" class="flex items-center space-x-2">
                     <button onclick="openAuthModal('login')" class="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-indigo-600 transition-colors">Đăng nhập</button>
-                    <button onclick="openAuthModal('register')" class="px-4.5 py-2 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl shadow-md shadow-indigo-100 transition-all">Đăng ký</button>
+                    <button onclick="openAuthModal('register')" class="px-4.5 py-2 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl shadow-md transition-all">Đăng ký</button>
                 </div>
                 <div id="userLoggedSection" class="hidden flex items-center space-x-3">
                     <div class="text-right hidden sm:block">
                         <div id="userNameDisplay" class="text-sm font-bold text-slate-700">User</div>
                         <div class="text-xs text-emerald-600 font-medium flex items-center justify-end space-x-1">
                             <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
-                            <span>Online Cloud</span>
+                            <span>Đã đăng nhập</span>
                         </div>
                     </div>
                     <button onclick="handleLogout()" class="p-2 text-slate-400 hover:text-rose-600 rounded-xl hover:bg-rose-50 transition-colors" title="Đăng xuất">
@@ -103,7 +94,7 @@
                     </select>
                 </div>
 
-                <!-- Filter by Subject (Đã cập nhật đầy đủ KTPL và QPAN) -->
+                <!-- Filter by Subject -->
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Môn học</label>
                     <select id="filterSubject" onchange="filterDocuments()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm font-medium text-slate-700 focus:border-indigo-500 outline-none">
@@ -124,16 +115,6 @@
                     </select>
                 </div>
             </div>
-
-            <!-- Firebase Status Widget -->
-            <div class="bg-indigo-50 border border-indigo-100 rounded-2xl p-4 text-xs text-indigo-900 space-y-2">
-                <div class="font-bold flex items-center space-x-1.5 text-indigo-700">
-                    <i class="fa-solid fa-cloud"></i>
-                    <span>Trạng thái kết nối Cloud</span>
-                </div>
-                <p id="firebaseStatusText" class="text-indigo-600 leading-relaxed">Đang kết nối tới hệ thống cơ sở dữ liệu thời gian thực...</p>
-                <button onclick="toggleFirebaseConfigBox()" class="text-[11px] font-bold text-indigo-700 underline hover:text-indigo-800">Cấu hình Firebase riêng của bạn</button>
-            </div>
         </aside>
 
         <!-- Right Content: Document List & Feed -->
@@ -146,7 +127,7 @@
                 <div class="relative z-10 max-w-xl space-y-3">
                     <span class="bg-indigo-500/30 border border-indigo-400/30 text-indigo-200 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Kho tài liệu thông minh miễn phí</span>
                     <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Chia sẻ tri thức - Kết nối học tập</h1>
-                    <p class="text-indigo-200 text-sm leading-relaxed">Tải lên và tìm kiếm tài liệu, đề thi, bài giảng chi tiết theo từng môn học và khối lớp dễ dàng. Hoàn toàn miễn phí cho mọi học sinh, sinh viên!</p>
+                    <p class="text-indigo-200 text-sm leading-relaxed">Tải lên siêu nhanh, xem trước và tìm kiếm tài liệu, đề thi, bài giảng chi tiết theo từng môn học dễ dàng.</p>
                 </div>
             </div>
 
@@ -167,21 +148,17 @@
 
             <!-- Document List Grid -->
             <div id="documentGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <!-- Data will be loaded dynamically here -->
-                <div class="col-span-2 text-center py-12 bg-white rounded-2xl border border-slate-200/80">
-                    <i class="fa-solid fa-spinner fa-spin text-3xl text-indigo-600 mb-3"></i>
-                    <p class="text-sm font-semibold text-slate-500">Đang tải dữ liệu từ kho đám mây...</p>
-                </div>
+                <!-- Dữ liệu hiển thị tự động -->
             </div>
         </section>
     </main>
 
     <!-- FOOTER -->
     <footer class="bg-white border-t border-slate-200 mt-12 py-6 text-center text-xs text-slate-400">
-        <p>EduShare Cloud Platform &copy; 2026 - Miễn phí hoàn toàn cho học sinh và sinh viên.</p>
+        <p>EduShare Platform &copy; 2026 - Miễn phí hoàn toàn cho học sinh và sinh viên.</p>
     </footer>
 
-    <!-- MODAL: UPLOAD TÀI LIỆU (Đã cập nhật đầy đủ môn học) -->
+    <!-- MODAL: UPLOAD TÀI LIỆU -->
     <div id="uploadModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto">
             <div class="flex items-center justify-between border-b border-slate-100 pb-4">
@@ -240,7 +217,7 @@
 
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Mô tả chi tiết tài liệu</label>
-                    <textarea id="upDescription" rows="3" placeholder="Chia sẻ thêm về nội dung tài liệu này giúp người khác dễ tìm..." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm font-medium focus:border-indigo-500 outline-none"></textarea>
+                    <textarea id="upDescription" rows="3" placeholder="Chia sẻ thêm về nội dung tài liệu này..." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm font-medium focus:border-indigo-500 outline-none"></textarea>
                 </div>
 
                 <div>
@@ -250,11 +227,46 @@
 
                 <div class="pt-3 flex items-center justify-end space-x-3">
                     <button type="button" onclick="closeUploadModal()" class="px-5 py-2.5 text-sm font-semibold text-slate-500 hover:text-slate-700">Hủy</button>
-                    <button type="submit" id="btnSubmitUpload" class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm rounded-xl shadow-md shadow-indigo-100 flex items-center space-x-2">
-                        <span>Xác nhận tải lên</span>
+                    <button type="submit" class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm rounded-xl shadow-md transition-all">
+                        <span>Xác nhận tải lên ngay</span>
                     </button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- MODAL: XEM TRƯỚC TÀI LIỆU -->
+    <div id="previewModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div class="space-y-1">
+                    <span id="prevBadge" class="bg-indigo-50 text-indigo-700 font-bold text-xs px-2.5 py-0.5 rounded-lg">Môn học</span>
+                    <h3 id="prevTitle" class="text-lg font-extrabold text-slate-800">Tiêu đề tài liệu</h3>
+                </div>
+                <button onclick="closePreviewModal()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-400 hover:text-slate-600 flex items-center justify-center">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="space-y-3 text-sm">
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 space-y-2">
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Thông tin chi tiết</p>
+                    <p><strong>Khối lớp:</strong> <span id="prevGrade">--</span></p>
+                    <p><strong>Bài / Chương:</strong> <span id="prevLesson">--</span></p>
+                    <p><strong>Tác giả đăng:</strong> <span id="prevAuthor">--</span></p>
+                </div>
+                <div>
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Mô tả nội dung</p>
+                    <p id="prevDesc" class="text-slate-600 leading-relaxed bg-white p-3 border border-slate-100 rounded-xl">Chưa có mô tả.</p>
+                </div>
+                <div class="p-4 bg-indigo-50/50 rounded-2xl border border-indigo-100 text-center space-y-2">
+                    <p class="text-xs text-indigo-700 font-semibold"><i class="fa-solid fa-file-arrow-down mr-1"></i> File đính kèm: <span id="prevFileName" class="font-bold"></span></p>
+                    <div>
+                        <button id="btnPreviewDownload" class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm rounded-xl shadow-md transition-all">
+                            <i class="fa-solid fa-download mr-1.5"></i> Tải xuống ngay
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -279,162 +291,79 @@
                 </div>
 
                 <div class="pt-2">
-                    <button type="submit" id="btnAuthSubmit" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm rounded-xl shadow-md shadow-indigo-100 transition-all">Đăng Nhập</button>
+                    <button type="submit" id="btnAuthSubmit" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm rounded-xl shadow-md transition-all">Đăng Nhập</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- MODAL: CẤU HÌNH FIREBASE RIÊNG -->
-    <div id="configModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl space-y-5">
-            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                <h3 class="text-lg font-extrabold text-slate-800">Cấu Hình Firebase Của Bạn</h3>
-                <button onclick="toggleFirebaseConfigBox()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-400 hover:text-slate-600 flex items-center justify-center">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            <p class="text-xs text-slate-500 leading-relaxed">Nếu bạn muốn dùng cơ sở dữ liệu Firebase riêng của chính bạn, hãy dán đoạn mã cấu hình Firebase vào ô dưới đây:</p>
-            <textarea id="customFirebaseConfigInput" rows="6" placeholder='{ apiKey: "...", authDomain: "...", projectId: "...", ... }' class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-mono outline-none"></textarea>
-            <div class="flex justify-end space-x-2">
-                <button onclick="saveCustomFirebaseConfig()" class="px-5 py-2.5 bg-indigo-600 text-white text-xs font-bold rounded-xl">Lưu cấu hình</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MAIN SCRIPT LOGIC -->
+    <!-- SCRIPT XỬ LÝ MƯỢT MÀ -->
     <script>
-        // Mặc định sử dụng cấu hình Firebase demo sẵn sàng chạy ngay
-        let firebaseConfig = {
-            apiKey: "AIzaSyD-DemoKeyForEduShareCloudInstance99",
-            authDomain: "edushare-cloud.firebaseapp.com",
-            projectId: "edushare-cloud-default",
-            storageBucket: "edushare-cloud.appspot.com",
-            messagingSenderId: "123456789",
-            appId: "1:123456:web:abcdef"
-        };
-
-        let app, db, auth;
-        let currentUser = null;
         let allDocuments = [];
+        let currentUser = null;
         let authMode = 'login';
 
-        window.addEventListener('DOMContentLoaded', async () => {
-            // Kiểm tra xem đã có cấu hình custom chưa
-            const savedCfg = localStorage.getItem('edushare_custom_firebase');
-            if (savedCfg) {
-                try { firebaseConfig = JSON.parse(savedCfg); } catch(e){}
-            }
-
-            initFirebaseSystem();
-
-            // Event listeners
+        window.addEventListener('DOMContentLoaded', () => {
+            loadDocuments();
             document.getElementById('searchInput').addEventListener('input', filterDocuments);
         });
 
-        function initFirebaseSystem() {
-            try {
-                const mods = window.firebaseModules;
-                app = mods.initializeApp(firebaseConfig);
-                db = mods.getFirestore(app);
-                auth = mods.getAuth(app);
-
-                mods.onAuthStateChanged(auth, (user) => {
-                    currentUser = user;
-                    updateAuthUI();
-                });
-
-                // Nếu chưa có user nào, đăng nhập ẩn danh mặc định để khách có thể xem và tải tài liệu ngay
-                mods.signInAnonymously(auth).catch(err => console.log("Anonymous auth note:", err));
-
-                document.getElementById('firebaseStatusTextinnerText') || (document.getElementById('firebaseStatusText').innerText = "Đã kết nối Cloud thành công! Sẵn sàng đồng bộ.");
-                loadDocumentsFromCloud();
-            } catch (err) {
-                console.error("Firebase init error:", err);
-                document.getElementById('firebaseStatusText').innerText = "Đang chạy chế độ lưu trữ mô phỏng bộ nhớ (Demo Mode).";
-                loadDemoDocuments();
-            }
-        }
-
-        async function loadDocumentsFromCloud() {
-            const grid = document.getElementById('documentGrid');
-            try {
-                const mods = window.firebaseModules;
-                const q = mods.query(mods.collection(db, "documents"), mods.orderBy("createdAt", "desc"));
-                const querySnapshot = await mods.getDocs(q);
-                allDocuments = [];
-                querySnapshot.forEach((docSnap) => {
-                    allDocuments.push({ id: docSnap.id, ...docSnap.data() });
-                });
-
-                if (allDocuments.length === 0) {
-                    loadDemoDocuments();
-                } else {
-                    renderDocuments(allDocuments);
+        function loadDocuments() {
+            const saved = localStorage.getItem('edushare_clean_docs');
+            if (saved) {
+                try {
+                    allDocuments = JSON.parse(saved);
+                } catch(e) {
+                    allDocuments = [];
                 }
-            } catch (err) {
-                console.log("Cloud load fallback to demo:", err);
-                loadDemoDocuments();
             }
-        }
 
-        function loadDemoDocuments() {
-            // Dữ liệu mẫu minh họa có đầy đủ các môn học
-            allDocuments = [
-                {
-                    id: 'demo-1',
-                    title: 'Đề cương ôn tập giữa kì 1 Vật lý 10 chuẩn cấu trúc mới',
-                    grade: 'Lớp 10',
-                    subject: 'Vật lý',
-                    lesson: 'Chương 1 & Chương 2: Động học',
-                    description: 'Tổng hợp lý thuyết trọng tâm và bài tập tự luận có lời giải chi tiết giúp ôn thi môn Vật lý 10 đạt điểm 9.5+.',
-                    author: 'Thanh Nhi (Admin)',
-                    downloads: 48,
-                    fileData: '#',
-                    fileName: 'De-cuong-Vat-Ly-10.pdf',
-                    createdAt: new Date().toISOString()
-                },
-                {
-                    id: 'demo-2',
-                    title: 'Sơ đồ tư duy và Bài tập trắc nghiệm Kinh tế và Pháp luật 10',
-                    grade: 'Lớp 10',
-                    subject: 'Kinh tế và Pháp luật',
-                    lesson: 'Chủ đề: Nền kinh tế và các hoạt động kinh tế',
-                    description: 'Tài liệu tóm tắt kiến thức cốt lõi môn KTPL 10 bằng sơ đồ trực quan, dễ nhớ, phục vụ kiểm tra thường xuyên.',
-                    author: 'Minh Thư',
-                    downloads: 32,
-                    fileData: '#',
-                    fileName: 'KTPL-10-So-do-tu-duy.pdf',
-                    createdAt: new Date().toISOString()
-                },
-                {
-                    id: 'demo-3',
-                    title: 'Tài liệu hướng dẫn thực hành Quốc phòng và An ninh lớp 10',
-                    grade: 'Lớp 10',
-                    subject: 'Quốc phòng và An ninh',
-                    lesson: 'Bài học các đội hình đội ngũ từng người không có súng',
-                    description: 'Tài liệu hướng dẫn chi tiết các động tác nghiêm, nghỉ, quay tại chỗ và đi đều.',
-                    author: 'Ban Cán Sự 10A12',
-                    downloads: 19,
-                    fileData: '#',
-                    fileName: 'Quoc-phong-10-Thuc-hanh.pdf',
-                    createdAt: new Date().toISOString()
-                },
-                {
-                    id: 'demo-4',
-                    title: 'Bộ đề thi thử Toán 10 nâng cao bồi dưỡng học sinh giỏi',
-                    grade: 'Lớp 10',
-                    subject: 'Toán học',
-                    lesson: 'Hệ thức lượng trong tam giác & Véc-tơ',
-                    description: 'Tuyển tập 50 bài toán hay và khó có lời giải chi tiết dành cho học sinh mục tiêu điểm 9+ Toán.',
-                    author: 'Gia Bảo',
-                    downloads: 75,
-                    fileData: '#',
-                    fileName: 'Toan-10-Nang-Cao.pdf',
-                    createdAt: new Date().toISOString()
-                }
-            ];
+            if (allDocuments.length === 0) {
+                allDocuments = [
+                    {
+                        id: 'demo-1',
+                        title: 'Đề cương ôn tập giữa kì 1 Vật lý 10 chuẩn cấu trúc mới',
+                        grade: 'Lớp 10',
+                        subject: 'Vật lý',
+                        lesson: 'Chương 1 & Chương 2: Động học',
+                        description: 'Tổng hợp lý thuyết trọng tâm và bài tập tự luận có lời giải chi tiết giúp ôn thi môn Vật lý 10 đạt điểm 9.5+.',
+                        author: 'Thanh Nhi',
+                        downloads: 48,
+                        fileName: 'De-cuong-Vat-Ly-10.pdf',
+                        createdAt: new Date().toISOString()
+                    },
+                    {
+                        id: 'demo-2',
+                        title: 'Sơ đồ tư duy và Bài tập trắc nghiệm Kinh tế và Pháp luật 10',
+                        grade: 'Lớp 10',
+                        subject: 'Kinh tế và Pháp luật',
+                        lesson: 'Chủ đề: Nền kinh tế và các hoạt động kinh tế',
+                        description: 'Tài liệu tóm tắt kiến thức cốt lõi môn KTPL 10 bằng sơ đồ trực quan, dễ nhớ, phục vụ kiểm tra thường xuyên.',
+                        author: 'Minh Thư',
+                        downloads: 32,
+                        fileName: 'KTPL-10-So-do-tu-duy.pdf',
+                        createdAt: new Date().toISOString()
+                    },
+                    {
+                        id: 'demo-3',
+                        title: 'Tài liệu hướng dẫn thực hành Quốc phòng và An ninh lớp 10',
+                        grade: 'Lớp 10',
+                        subject: 'Quốc phòng và An ninh',
+                        lesson: 'Bài học các đội hình đội ngũ từng người không có súng',
+                        description: 'Tài liệu hướng dẫn chi tiết các động tác nghiêm, nghỉ, quay tại chỗ và đi đều.',
+                        author: 'Ban Cán Sự 10A12',
+                        downloads: 19,
+                        fileName: 'Quoc-phong-10-Thuc-hanh.pdf',
+                        createdAt: new Date().toISOString()
+                    }
+                ];
+                saveToStorage();
+            }
             renderDocuments(allDocuments);
+        }
+
+        function saveToStorage() {
+            localStorage.setItem('edushare_clean_docs', JSON.stringify(allDocuments));
         }
 
         function renderDocuments(docs) {
@@ -445,7 +374,7 @@
                 grid.innerHTML = `
                     <div class="col-span-2 text-center py-12 bg-white rounded-2xl border border-slate-200/80">
                         <i class="fa-solid fa-folder-open text-4xl text-slate-300 mb-3"></i>
-                        <p class="text-sm font-semibold text-slate-500">Không tìm thấy tài liệu phù hợp với bộ lọc của bạn.</p>
+                        <p class="text-sm font-semibold text-slate-500">Chưa có tài liệu nào phù hợp với tìm kiếm.</p>
                     </div>
                 `;
                 return;
@@ -471,10 +400,12 @@
                             <span>${escapeHtml(doc.author || 'Thành viên')}</span>
                         </div>
                         <div class="flex items-center space-x-2">
-                            <span class="text-slate-400 font-medium"><i class="fa-solid fa-download mr-1"></i>${doc.downloads || 0}</span>
-                            <button onclick="downloadDocument('${doc.id}', '${escapeHtml(doc.fileName || 'tai-lieu.pdf')}')" class="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-sm transition-all flex items-center space-x-1.5">
+                            <button onclick="openPreviewModal('${doc.id}')" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition-all" title="Xem trước tài liệu">
+                                <i class="fa-solid fa-eye"></i> Xem
+                            </button>
+                            <button onclick="downloadDocument('${doc.id}')" class="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-sm transition-all flex items-center space-x-1.5">
                                 <i class="fa-solid fa-download"></i>
-                                <span>Tải về</span>
+                                <span>Tải (${doc.downloads || 0})</span>
                             </button>
                         </div>
                     </div>
@@ -514,33 +445,47 @@
             renderDocuments(allDocuments);
         }
 
-        async function downloadDocument(id, fileName) {
-            // Tăng số lượt tải
+        function downloadDocument(id) {
             const docItem = allDocuments.find(d => d.id === id);
-            if (docItem) {
-                docItem.downloads = (docItem.downloads || 0) + 1;
-                renderDocuments(allDocuments);
+            if (!docItem) return;
 
-                try {
-                    const mods = window.firebaseModules;
-                    const docRef = mods.doc(db, "documents", id);
-                    await mods.updateDoc(docRef, { downloads: mods.increment(1) });
-                } catch(e) {}
-            }
+            docItem.downloads = (docItem.downloads || 0) + 1;
+            saveToStorage();
+            renderDocuments(allDocuments);
 
-            // Tạo file tải về giả lập thực tế
-            const blob = new Blob([`Tài liệu học tập EduShare Cloud\nTên tài liệu: ${docItem ? docItem.title : fileName}\nĐược chia sẻ miễn phí qua EduShare Cloud.`], { type: 'text/plain;charset=utf-8' });
+            const content = `=== TÀI LIỆU HỌC TẬP EDUSHARE ===\nTiêu đề: ${docItem.title}\nKhối lớp: ${docItem.grade}\nMôn học: ${docItem.subject}\nBài/Chương: ${docItem.lesson}\nMô tả: ${docItem.description || 'Không có mô tả.'}\nTác giả: ${docItem.author}\nNgày tải lên: ${docItem.createdAt}`;
+            
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = fileName;
+            a.download = docItem.fileName || 'tai-lieu.txt';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
         }
 
-        // Upload Modal Controls
+        function openPreviewModal(id) {
+            const docItem = allDocuments.find(d => d.id === id);
+            if (!docItem) return;
+
+            document.getElementById('prevBadge').innerText = `${docItem.grade} - ${docItem.subject}`;
+            document.getElementById('prevTitle').innerText = docItem.title;
+            document.getElementById('prevGrade').innerText = docItem.grade;
+            document.getElementById('prevLesson').innerText = docItem.lesson;
+            document.getElementById('prevAuthor').innerText = docItem.author || 'Thành viên';
+            document.getElementById('prevDesc').innerText = docItem.description || 'Không có mô tả chi tiết.';
+            document.getElementById('prevFileName').innerText = docItem.fileName || 'tai-lieu.txt';
+            document.getElementById('btnPreviewDownload').onclick = () => downloadDocument(docItem.id);
+
+            document.getElementById('previewModal').classList.remove('hidden');
+        }
+
+        function closePreviewModal() {
+            document.getElementById('previewModal').classList.add('hidden');
+        }
+
         function openUploadModal() {
             document.getElementById('uploadModal').classList.remove('hidden');
         }
@@ -549,7 +494,7 @@
             document.getElementById('uploadForm').reset();
         }
 
-        async function handleUploadSubmit(e) {
+        function handleUploadSubmit(e) {
             e.preventDefault();
             const title = document.getElementById('upTitle').value;
             const grade = document.getElementById('upGrade').value;
@@ -557,11 +502,13 @@
             const lesson = document.getElementById('upLesson').value;
             const description = document.getElementById('upDescription').value;
             const fileInput = document.getElementById('upFile');
-            const fileName = fileInput.files[0] ? fileInput.files[0].name : 'tai-lieu.pdf';
-
-            const authorName = currentUser && currentUser.email ? currentUser.email.split('@')[0] : 'Thành viên ẩn danh';
+            
+            const file = fileInput.files[0];
+            const fileName = file ? file.name : 'tai-lieu.pdf';
+            const authorName = currentUser && currentUser.email ? currentUser.email.spec('@')[0] : 'Thành viên ẩn danh';
 
             const newDoc = {
+                id: 'doc-' + Date.now(),
                 title,
                 grade,
                 subject,
@@ -573,30 +520,13 @@
                 createdAt: new Date().toISOString()
             };
 
-            const btn = document.getElementById('btnSubmitUpload');
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> Đang tải lên Cloud...`;
-            btn.disabled = true;
-
-            try {
-                const mods = window.firebaseModules;
-                await mods.addDoc(mods.collection(db, "documents"), {
-                    ...newDoc,
-                    createdAt: mods.serverTimestamp()
-                });
-                await loadDocumentsFromCloud();
-            } catch (err) {
-                console.log("Upload cloud error, saving locally:", err);
-                allDocuments.unshift({ id: 'local-' + Date.now(), ...newDoc });
-                renderDocuments(allDocuments);
-            }
-
-            btn.innerHTML = `<span>Xác nhận tải lên</span>`;
-            btn.disabled = false;
+            allDocuments.unshift(newDoc);
+            saveToStorage();
+            renderDocuments(allDocuments);
             closeUploadModal();
-            alert("Tải lên tài liệu thành công lên hệ thống!");
+            alert("Tải lên tài liệu thành công!");
         }
 
-        // Auth Modal Controls
         function openAuthModal(mode) {
             authMode = mode;
             document.getElementById('authModalTitle').innerText = mode === 'login' ? 'Đăng Nhập Tài Khoản' : 'Đăng Ký Tài Khoản';
@@ -608,69 +538,22 @@
             document.getElementById('authForm').reset();
         }
 
-        async function handleAuthSubmit(e) {
+        function handleAuthSubmit(e) {
             e.preventDefault();
             const email = document.getElementById('authEmail').value;
-            const pass = document.getElementById('authPassword').value;
-
-            try {
-                const mods = window.firebaseModules;
-                if (authMode === 'login') {
-                    await mods.signInWithEmailAndPassword(auth, email, pass);
-                    alert("Đăng nhập thành công!");
-                } else {
-                    await mods.createUserWithEmailAndPassword(auth, email, pass);
-                    alert("Đăng ký tài khoản thành công!");
-                }
-                closeAuthModal();
-            } catch (err) {
-                alert("Lỗi xác thực: " + err.message);
-            }
+            currentUser = { email };
+            document.getElementById('userGuestSection').classList.add('hidden');
+            document.getElementById('userLoggedSection').classList.remove('hidden');
+            document.getElementById('userNameDisplay').innerText = email;
+            closeAuthModal();
+            alert(authMode === 'login' ? "Đăng nhập thành công!" : "Đăng ký thành công!");
         }
 
-        async function handleLogout() {
-            try {
-                const mods = window.firebaseModules;
-                await mods.signOut(auth);
-                alert("Đã đăng xuất thành công!");
-            } catch(e) {}
-        }
-
-        function updateAuthUI() {
-            const guestSec = document.getElementById('userGuestSection');
-            const loggedSec = document.getElementById('userLoggedSection');
-            const nameDisp = document.getElementById('userNameDisplay');
-
-            if (currentUser && !currentUser.isAnonymous) {
-                guestSec.classList.add('hidden');
-                loggedSec.classList.remove('hidden');
-                nameDisp.innerText = currentUser.email;
-            } else {
-                guestSec.classList.remove('hidden');
-                loggedSec.classList.add('hidden');
-            }
-        }
-
-        function toggleFirebaseConfigBox() {
-            const modal = document.getElementById('configModal');
-            modal.classList.toggle('hidden');
-            if(!modal.classList.contains('hidden')) {
-                document.getElementById('customFirebaseConfigInput').value = JSON.stringify(firebaseConfig, null, 2);
-            }
-        }
-
-        function saveCustomFirebaseConfig() {
-            try {
-                const val = document.getElementById('customFirebaseConfigInput').value;
-                const parsed = JSON.parse(val);
-                firebaseConfig = parsed;
-                localStorage.setItem('edushare_custom_firebase', JSON.stringify(parsed));
-                toggleFirebaseConfigBox();
-                initFirebaseSystem();
-                alert("Đã cập nhật cấu hình Firebase cá nhân thành công!");
-            } catch(e) {
-                alert("Định dạng JSON không hợp lệ. Vui lòng kiểm tra lại!");
-            }
+        function handleLogout() {
+            currentUser = null;
+            document.getElementById('userGuestSection').classList.remove('hidden');
+            document.getElementById('userLoggedSection').classList.add('hidden');
+            alert("Đã đăng xuất!");
         }
 
         function escapeHtml(str) {
